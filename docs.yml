@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: Gerenciador de Tarefas - OpenAPI 3.0
+  description: |-
+    Esta é uma API para gerenciamento de tarefas feita com Java e o framework Spring Boot. Ela foi criada como atividade para a matéria de Programação Web, no curso de Ciência da Computação da Universiade Regional Integrada do Alto Uruguai e das Missões.
+  contact:
+    email: 101716@aluno.uricer.edu.br
+  version: 1.0.0
+servers:
+  - url: localhost:8080
+tags:
+  - name: tasks
+    description: CRUD e gerenciamento de tarefas.
+
+paths:
+  /tasks:
+    post:
+      tags:
+        - tasks
+      summary: Cadastrar uma nova tarefa
+      requestBody:
+        description: Dados da nova tarefa
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+            example:
+              description: "Arrumar a cama"
+              createDate: "2024-05-28"
+              limitDate: "2024-05-28"
+              finished: false
+      responses:
+        '201':
+          description: Tarefa criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                id: 5
+                description: "Arrumar a cama"
+                createDate: "2024-05-28T00:00:00.000+00:00"
+                limitDate: "2024-05-28T00:00:00.000+00:00"
+                finished: false
+
+    get:
+      tags:
+        - tasks
+      summary: Buscar todas as tarefas
+      responses:
+        '200':
+          description: Lista de todas as tarefas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              example:
+                - id: 1
+                  description: "Lavar a louça"
+                  createDate: "2024-04-25T03:00:00.000+00:00"
+                  limitDate: "2024-04-26T03:00:00.000+00:00"
+                  finished: false
+                - id: 2
+                  description: "Varrer o chão"
+                  createDate: "2024-04-26T03:00:00.000+00:00"
+                  limitDate: "2024-04-27T03:00:00.000+00:00"
+                  finished: false
+                - id: 3
+                  description: "Lustrar os móveis"
+                  createDate: "2024-04-27T03:00:00.000+00:00"
+                  limitDate: "2024-04-28T03:00:00.000+00:00"
+                  finished: false
+                - id: 4
+                  description: "Terminar o PI"
+                  createDate: "2024-03-10T03:00:00.000+00:00"
+                  limitDate: "2024-07-30T03:00:00.000+00:00"
+                  finished: false
+                - id: 5
+                  description: "Arrumar a cama"
+                  createDate: "2024-05-28T00:00:00.000+00:00"
+                  limitDate: "2024-05-28T00:00:00.000+00:00"
+                  finished: false
+
+  /tasks/{id}:
+    get:
+      tags:
+        - tasks
+      summary: Buscar uma tarefa específica por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tarefa encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                id: 3
+                description: "Lustrar os móveis"
+                createDate: "2024-04-27T03:00:00.000+00:00"
+                limitDate: "2024-04-28T03:00:00.000+00:00"
+                finished: false
+
+    put:
+      tags:
+        - tasks
+      summary: Atualizar uma tarefa
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Dados atualizados da tarefa
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+            example:
+              description: "Lustrar os móveis e as janelas"
+              createDate: "2024-04-27T03:00:00.000+00:00"
+              limitDate: "2024-04-28T03:00:00.000+00:00"
+              finished: false
+      responses:
+        '200':
+          description: Tarefa atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                id: 3
+                description: "Lustrar os móveis e as janelas"
+                createDate: "2024-04-27T03:00:00.000+00:00"
+                limitDate: "2024-04-28T03:00:00.000+00:00"
+                finished: false
+
+    delete:
+      tags:
+        - tasks
+      summary: Deletar uma tarefa
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Tarefa deletada com sucesso
+
+  /finished/{id}:
+    put:
+      tags:
+        - tasks
+      summary: Marcar uma tarefa como concluída
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tarefa marcada como concluída
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                id: 5
+                description: "Arrumar a cama"
+                createDate: "2024-05-28T00:00:00.000+00:00"
+                limitDate: "2024-05-28T00:00:00.000+00:00"
+                finished: true
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        description:
+          type: string
+          example: Arrumar a cama
+        createDate:
+          type: string
+          format: date-time
+          example: 2024-05-28T00:00:00.000+00:00
+        limitDate:
+          type: string
+          format: date-time
+          example: 2024-05-28T00:00:00.000+00:00
+        finished:
+          type: boolean
+          example: false
