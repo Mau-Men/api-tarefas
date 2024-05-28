@@ -6,18 +6,18 @@ Esta é uma API para gerenciamento de tarefas feita com Java e o framework Sprin
 
 Para rodar a API, primeiro execute o projeto dentro da IDE, em [UserDepApplication.java](./user-dep/src/main/java/com/uri/pw/userdep/UserDepApplication.java):
 
-![Rodar API](./images/1.png)
+![Rodar API](./Images/1.png)
 
 Depois, teste ela pelo sua plataforma de API de preferência, como o [Postman](https://www.postman.com/) ou [Insomnia](https://insomnia.rest/).
 
-![Rodar API](./images/2.png)
+![Rodar API](./Images/2.png)
 
 ## Rodando os Testes
 
 Para executar os testes unitários, não é necessário que a API esteja rodando. Apenas execute o arquivo [TaskServiceTests.java](./user-dep/src/test/java/com/uri/pw/userdep/TaskServiceTests.java):
 
-![Rodar API](./images/3.png)
+![Rodar API](./Images/3.png)
 
 Ao executar os testes, eles devem todos passar:
 
-![Rodar API](./images/4.png)
+![Rodar API](./Images/4.png)
