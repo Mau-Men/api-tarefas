@@ -1,5 +1,10 @@
 # API Tarefas
 
+Integrantes:
+- Brenda Breitenbach
+- Eduardo Roscioli
+- Mauro Fantin
+
 Esta é uma API para gerenciamento de tarefas feita com Java e o framework Spring Boot. Ela foi criada como atividade para a matéria de Programação Web, no curso de Ciência da Computação da Universiade Regional Integrada do Alto Uruguai e das Missões.
 
 ## Rodando a API
